@@ -2,8 +2,9 @@ import Order from "../../../../domain/checkout/entity/order";
 import OrderModel from "./model/order.model";
 import OrderItemModel from "./model/order-item.model";
 import OrderItem from "../../../../domain/checkout/entity/orderItem";
+import OrderRepositoryInterface from "../../../../domain/checkout/repository/order.repository.interface";
 
-export default class OrderRepository {
+export default class OrderRepository implements OrderRepositoryInterface{
     async create(entity: Order): Promise<void> {
         await OrderModel.create(
             {
