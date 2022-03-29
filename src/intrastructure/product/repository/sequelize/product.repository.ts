@@ -11,12 +11,18 @@ export default class ProductRepository implements ProductRepositoryInterface {
         });
     }
 
-    find(id: string): Promise<Product> {
-        return Promise.resolve(undefined);
+    async find(id: string): Promise<Product> {
+        try {
+            const productModel = await ProductModel.findOne({rejectOnEmpty: true, where: {id}});
+            return new Product(productModel.id, productModel.name, productModel.price);
+        } catch (e) {
+            return Promise.reject("Product does not exist");
+        }
     }
 
-    findAll(): Promise<Product[]> {
-        return Promise.resolve([]);
+    async findAll(): Promise<Product[]> {
+        const productModels = await ProductModel.findAll();
+        return productModels.map(productModel => new Product(productModel.id, productModel.name, productModel.price));
     }
 
     async update(entity: Product): Promise<void> {
@@ -25,9 +31,8 @@ export default class ProductRepository implements ProductRepositoryInterface {
                 price: entity.price,
             },
             {
-                where: {
-                    id: entity.id
-                }, returning: true
+                where: {id: entity.id},
+                returning: true
             })
     }
 

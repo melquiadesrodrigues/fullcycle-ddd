@@ -36,4 +36,14 @@ describe("Order unit tests", () => {
         expect(total2).toBe(50);
     });
 
+    it("should paid", () => {
+        const item1 = new OrderItem("1", "p1", "Item1", 10, 1);
+        const order1 = new Order("1", "1", [item1]);
+        order1.pay();
+
+        const paid = order1.paid
+
+        expect(paid).toBe(true);
+    });
+
 });

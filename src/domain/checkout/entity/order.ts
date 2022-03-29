@@ -5,6 +5,7 @@ export default class Order {
     private readonly _customerId: string;
     private readonly _items: OrderItem[] = [];
     private readonly _total: number;
+    private _paid: boolean = false;
 
     constructor(id: string, customerId: string, items: OrderItem[]) {
         this._id = id;
@@ -31,6 +32,14 @@ export default class Order {
         return this._total;
     }
 
+    get paid(): boolean {
+        return this._paid
+    }
+
+    pay(): void {
+        this._paid = true;
+    }
+
     private validate() {
         if (this._id.length === 0) {
             throw new Error("Id is required");
@@ -44,6 +53,6 @@ export default class Order {
     }
 
     private calcTotal(): number {
-        return this._items.reduce((acc:number, item: OrderItem) => acc + item.price, 0)
+        return this._items.reduce((acc: number, item: OrderItem) => acc + item.total, 0)
     }
 }

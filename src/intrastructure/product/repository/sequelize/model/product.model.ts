@@ -8,6 +8,7 @@ type ProductAttributes = {
 
 type ProductCreationAttributes = ProductAttributes;
 
+// noinspection JSAnnotator
 @Table({
     tableName: "products",
     timestamps: false,
