@@ -20,7 +20,7 @@ describe("Customer repository test", () => {
     });
 
     const verifySavedModel = (customer: Customer, customerModel: CustomerModel) => {
-        expect(customerModel.toJSON()).toStrictEqual({
+        expect(customerModel.toJSON()).trictEqual({
             id: customer.id,
             name: customer.name,
             active: customer.isActive(),
